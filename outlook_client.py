@@ -66,10 +66,15 @@ class OutlookClient:
         # )
 
         correo.To = (
+<<<<<<< HEAD
             "193112-stti@banobras.gob.mx"
+=======
+            "tu_correo@ejemplo.com"
+>>>>>>> e90a5329632c80dcc19c33b6d65c4fe08711d610
         )
 
         correo.CC = (
+<<<<<<< HEAD
             "aaguilar@omniprinter.mx;"
             "luz.rivera@atalait.com;"
             "carlos.lopez@atalait.com;"
@@ -81,6 +86,9 @@ class OutlookClient:
             "jose.mendez@atalait.com;"
             "lorenzo.reinoso@atalait.com;"
             "ricardo.alvarez@atalait.com"
+=======
+            "tu_correo@ejemplo.com"
+>>>>>>> e90a5329632c80dcc19c33b6d65c4fe08711d610
         )
 
         correo.Subject = (
