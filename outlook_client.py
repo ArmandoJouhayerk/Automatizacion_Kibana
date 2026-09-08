@@ -55,14 +55,32 @@ class OutlookClient:
                 "No fue posible crear el correo en Outlook"
             )
 
-        # Remplazar por las direcciones de correo deseadas
+        # # Remplazar por las direcciones de correo deseadas
+        # correo.To = (
+        #     "jose.mendez@atalait.com"
+        # )
+
+        # # Remplazar por las direcciones de correo deseadas
+        # correo.CC = (
+        #     "jose.mendez@atalait.com"
+        # )
+
         correo.To = (
-            "jose.mendez@atalait.com"
+            "193112-stti@banobras.gob.mx"
         )
 
-        # Remplazar por las direcciones de correo deseadas
         correo.CC = (
-            "jose.mendez@atalait.com"
+            "aaguilar@omniprinter.mx;"
+            "luz.rivera@atalait.com;"
+            "carlos.lopez@atalait.com;"
+            "christian.aguilar@atalait.com;"
+            "claudia.chapa@atalait.com;"
+            "cristian.carrillo@atalait.com;"
+            "edwin.gil@atalait.com;"
+            "emanuel.zavala@atalait.com;"
+            "jose.mendez@atalait.com;"
+            "lorenzo.reinoso@atalait.com;"
+            "ricardo.alvarez@atalait.com"
         )
 
         correo.Subject = (
@@ -71,14 +89,14 @@ class OutlookClient:
         )
 
         correo.Body = """
-    Buenos días, equipo:
+Buenos días, equipo:
 
-    Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al    momento de la validación.
+Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
 
-    Quedo atento a cualquier comentario.
+Quedo atento a cualquier comentario.
 
-    Saludos.
-"""
+Saludos.
+    """
 
         correo.Attachments.Add(
             archivo_pdf

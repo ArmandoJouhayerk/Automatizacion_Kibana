@@ -27,7 +27,7 @@ class KibanaClient:
 
         return os.path.join(
             self.carpeta_descargas,
-            f"S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD v4_{fecha_archivo}.pdf"
+            f"S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD_{fecha_archivo}.pdf"
         )
     
     def login(self,page):
@@ -127,14 +127,6 @@ class KibanaClient:
         ).click()
 
         page.wait_for_timeout(2000)
-
-        self.logger.escribir_log(
-            "Share abierto correctamente"
-        )
-
-        self.logger.escribir_log(
-            f"URL ACTUAL: {page.url}"
-        )
 
     def abrir_export(self, page):
         
