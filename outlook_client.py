@@ -2,7 +2,6 @@ import time
 import win32com.client
 from datetime import datetime
 
-
 class OutlookClient:
 
     def __init__(self, logger):

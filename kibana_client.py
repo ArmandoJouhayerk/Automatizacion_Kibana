@@ -235,3 +235,4 @@ class KibanaClient:
             browser.close()
 
             return archivo_pdf
+        

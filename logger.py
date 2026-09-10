@@ -9,3 +9,4 @@ class Logger:
         with open(self.log_file, "a", encoding="utf-8") as log:
             fecha_log = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
             log.write(f"[{fecha_log}] {mensaje}\n")
+            

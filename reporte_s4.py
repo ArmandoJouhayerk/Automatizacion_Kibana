@@ -20,3 +20,4 @@ class ReporteS4:
         self.outlook_client.enviar_reporte(
             archivo_pdf
         )
+        
