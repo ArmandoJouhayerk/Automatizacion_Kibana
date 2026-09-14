@@ -4,6 +4,7 @@ from logger import Logger
 from outlook_client import OutlookClient
 from kibana_client import KibanaClient
 from reporte_s4 import ReporteS4
+from mantenimiento import Mantenimiento
 
 # configuracion de login y descarga 
 USUARIO = Config.USUARIO
@@ -41,6 +42,21 @@ reporte_s4 = ReporteS4(
 def main():
 
     try:
+
+        Mantenimiento.limpiar_log(
+            ARCHIVO_LOG,
+            max_mb=1
+        )
+        pdfs_eliminados = (
+            Mantenimiento.limpiar_pdfs(
+                CARPETA_DESCARGAS,
+                dias=30
+            )
+        )
+
+        logger.escribir_log(
+            f"Mantenimiento: {pdfs_eliminados} PDF(s) eliminados"
+        )
 
         logger.escribir_log(
             "Inicio de ejecución"

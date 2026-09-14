@@ -22,7 +22,7 @@ class KibanaClient:
     def obtener_ruta_pdf(self):
 
         fecha_archivo = datetime.now().strftime(
-            "%d-%m-%Y_%H-%M"
+            "%d-%m-%Y"
         )
 
         return os.path.join(
