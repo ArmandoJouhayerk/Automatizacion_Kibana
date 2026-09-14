@@ -224,7 +224,7 @@ Cuando el archivo:
 Reporte_S4.log
 ```
 
-supera el tamaño configurado (5 MB por defecto), se reinicia automáticamente para evitar crecimiento indefinido.
+supera el tamaño configurado (1 MB por defecto), se reinicia automáticamente para evitar crecimiento indefinido.
 
 #### Registro de mantenimiento
 
@@ -250,7 +250,7 @@ Reportes_S4
 Formato:
 
 ```text
-S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD v4_DD-MM-AAAA_HH-MM.pdf
+S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD _DD-MM-AAAA.pdf
 ```
 
 ### Logs
