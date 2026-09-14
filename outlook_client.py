@@ -13,6 +13,12 @@ class OutlookClient:
         self,
         archivo_pdf
     ):
+        hora_actual = datetime.now().hour
+
+        if hora_actual < 12:
+            saludo = "Buenos días"
+        else:
+            saludo = "Buenas noches"
 
         self.logger.escribir_log(
             "Iniciando Outlook"
@@ -83,19 +89,18 @@ class OutlookClient:
         # )
 
         correo.Subject = (
-            "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD- "
-            + datetime.now().strftime("%d-%m-%Y")
+            "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD-"
+            + datetime.now().strftime("%d-%m-%Y_%H:%M")
         )
 
-        correo.Body = """
-Buenos días, equipo:
+        correo.Body = f"""{saludo}, equipo:
 
 Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
 
 Quedo atento a cualquier comentario.
 
 Saludos.
-    """
+        """
 
         correo.Attachments.Add(
             archivo_pdf
@@ -105,7 +110,7 @@ Saludos.
             "Reporte agregado al correo"
         )
 
-        correo.Send()
+        correo.Display()
 
         self.logger.escribir_log(
             "Correo enviado correctamente"
