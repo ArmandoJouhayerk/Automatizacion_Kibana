@@ -22,7 +22,7 @@ class KibanaClient:
     def obtener_ruta_pdf(self):
 
         fecha_archivo = datetime.now().strftime(
-            "%d-%m-%Y_%H:%M"
+            "%d-%m-%Y_%H-%M"
         )
 
         return os.path.join(
@@ -187,10 +187,6 @@ class KibanaClient:
 
         self.logger.escribir_log(
             f"PDF guardado: {archivo_pdf}"
-        )
-
-        self.logger.escribir_log(
-            f"Tamaño PDF: {os.path.getsize(archivo_pdf)} bytes"
         )
 
         return archivo_pdf

@@ -1,6 +1,8 @@
+import os
 import time
 import win32com.client
 from datetime import datetime
+
 
 class OutlookClient:
 
@@ -8,11 +10,13 @@ class OutlookClient:
 
         self.logger = logger
 
+
     # Función para enviar el reporte por correo electrónico
     def enviar_reporte(
         self,
         archivo_pdf
     ):
+
         hora_actual = datetime.now().hour
 
         if hora_actual < 12:
@@ -90,7 +94,7 @@ class OutlookClient:
 
         correo.Subject = (
             "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD-"
-            + datetime.now().strftime("%d-%m-%Y_%H:%M")
+            + datetime.now().strftime("%d-%m-%Y_%H-%M")
         )
 
         correo.Body = f"""{saludo}, equipo:
@@ -101,6 +105,18 @@ Quedo atento a cualquier comentario.
 
 Saludos.
         """
+
+        if not archivo_pdf:
+
+            raise Exception(
+                f"archivo_pdf viene vacío: {archivo_pdf}"
+            )
+
+        if not os.path.exists(str(archivo_pdf)):
+
+            raise Exception(
+                f"No existe el archivo: {archivo_pdf}"
+            )
 
         correo.Attachments.Add(
             archivo_pdf
