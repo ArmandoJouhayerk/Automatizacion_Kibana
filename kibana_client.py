@@ -189,10 +189,6 @@ class KibanaClient:
             f"PDF guardado: {archivo_pdf}"
         )
 
-        self.logger.escribir_log(
-            f"Tamaño PDF: {os.path.getsize(archivo_pdf)} bytes"
-        )
-
         return archivo_pdf
 
     def generar_reporte(self,page):

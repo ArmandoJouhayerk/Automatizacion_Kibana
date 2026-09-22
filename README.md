@@ -202,6 +202,39 @@ Lunes a Viernes
 08:00 PM
 ```
 
+--- 
+
+### Mantenimiento automático
+
+Antes de iniciar la generación del reporte se ejecutan tareas de mantenimiento preventivo:
+
+#### Limpieza de PDFs
+
+Se eliminan automáticamente los archivos PDF con más de 30 días de antigüedad almacenados en:
+
+```text
+Reportes_S4
+```
+
+#### Limpieza del log
+
+Cuando el archivo:
+
+```text
+Reporte_S4.log
+```
+
+supera el tamaño configurado (1 MB por defecto), se reinicia automáticamente para evitar crecimiento indefinido.
+
+#### Registro de mantenimiento
+
+Cada ejecución registra en el log la cantidad de archivos eliminados.
+
+Ejemplo:
+
+```text
+[04-09-2026 08:00:01] Mantenimiento: 3 PDF(s) eliminados
+```
 ---
 
 ## Salidas
@@ -217,7 +250,7 @@ Reportes_S4
 Formato:
 
 ```text
-S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD v4_DD-MM-AAAA_HH-MM.pdf
+S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD _DD-MM-AAAA.pdf
 ```
 
 ### Logs

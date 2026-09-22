@@ -1,6 +1,8 @@
+import os
 import time
 import win32com.client
 from datetime import datetime
+
 
 class OutlookClient:
 
@@ -8,11 +10,19 @@ class OutlookClient:
 
         self.logger = logger
 
+
     # Función para enviar el reporte por correo electrónico
     def enviar_reporte(
         self,
         archivo_pdf
     ):
+
+        hora_actual = datetime.now().hour
+
+        if hora_actual < 12:
+            saludo = "Buenos días"
+        else:
+            saludo = "Buenas noches"
 
         self.logger.escribir_log(
             "Iniciando Outlook"
@@ -83,19 +93,30 @@ class OutlookClient:
         )
 
         correo.Subject = (
-            "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD v4 - "
-            + datetime.now().strftime("%d-%m-%Y")
+            "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD-"
+            + datetime.now().strftime("%d-%m-%Y_%H-%M")
         )
 
-        correo.Body = """
-Buenos días, equipo:
+        correo.Body = f"""{saludo}, equipo:
 
 Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
 
 Quedo atento a cualquier comentario.
 
 Saludos.
-    """
+        """
+
+        if not archivo_pdf:
+
+            raise Exception(
+                f"archivo_pdf viene vacío: {archivo_pdf}"
+            )
+
+        if not os.path.exists(str(archivo_pdf)):
+
+            raise Exception(
+                f"No existe el archivo: {archivo_pdf}"
+            )
 
         correo.Attachments.Add(
             archivo_pdf
