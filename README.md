@@ -319,10 +319,15 @@ Antes de generar el PDF se validan automáticamente los indicadores críticos de
 Indicadores monitoreados:
 
 ```text
-Disponibilidad del servicio
-BAN_SWCORE_DC
-BAN_SWADMIN_DC
-Disponibilidades de enlaces
+   Disponibilidad del servicio
+   Disponibilidad por ping
+   BAN_SWCORE_DC_PRIMARIO
+   BAN_SWADMIN_DC_PRIMARIO
+   Disponibilidad L2L TRANSTELCO PRODUCCIÓN
+   Disponibilidad L2L TRANSTELCO REPLICA
+   Disponibilidad L2L ALESTRA PRODUCCIÓN
+   Disponibilidad L2L ALESTRA REPLICA
+   Disponibilidad Internet
 ```
 
 Condición requerida:
