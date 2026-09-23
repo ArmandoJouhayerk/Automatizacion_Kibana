@@ -1,13 +1,25 @@
+# Variables de entorno
+.env
+.env.*
+
 # Python
 __pycache__/
 *.pyc
 
+# Windows
+desktop.ini
+Thumbs.db
+
 # Logs
 *.log
 
-# Reportes PDF
+# Reportes generados
 Reportes_S4/
 *.pdf
+
+# Capturas de error
+Errores/
+*.png
 
 # VS Code
 .vscode/
@@ -15,5 +27,3 @@ Reportes_S4/
 # Entornos virtuales
 venv/
 .venv/
-
-.desktop.ini
