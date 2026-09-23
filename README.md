@@ -112,7 +112,7 @@ Responsabilidades:
 
 ### ReporteS4
 
-Clase responsable de coordinar el flujo de negocio.
+Clase responsable de coordinar el flujo de proceso.
 
 ```python
 ReporteS4
@@ -175,6 +175,9 @@ Instalar navegador para Playwright:
 ```bash
 python -m playwright install
 ```
+
+Instalar VPN GlobalProtect
+
 
 ---
 
@@ -250,7 +253,7 @@ Reportes_S4
 Formato:
 
 ```text
-S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD _DD-MM-AAAA.pdf
+S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD_DD-MM-AAAA_HH-MM.pdf
 ```
 
 ### Logs

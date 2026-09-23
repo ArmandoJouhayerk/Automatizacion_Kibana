@@ -76,6 +76,5 @@ def main():
 
         raise
 
-# Punto de entrada del script
 if __name__ == "__main__":
     main() 
