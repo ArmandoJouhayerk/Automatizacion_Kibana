@@ -37,3 +37,5 @@ class Config:
         r"C:\Users\jose.mendez\OneDrive - Scontinuidad Latam SA de CV\Documentos\S4Automation",
     "Errores"
     )
+
+    MAX_ERRORES = 10
