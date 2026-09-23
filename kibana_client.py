@@ -104,6 +104,42 @@ class KibanaClient:
 
         page.wait_for_timeout(10000)
 
+    def validar_disponibilidades(self,page):
+
+        metricas = page.locator(
+            '[data-test-subj="metric_value"]'
+        ).all_text_contents()
+
+        indicadores_disponibilidad = {
+            "Disponibilidad del servicio": 1,
+            "Disponibilidad por ping": 11,
+            "BAN_SWCORE_DC_PRIMARIO": 19,
+            "BAN_SWADMIN_DC_PRIMARIO": 22,
+            "Disponibilidad L2L TRANSTELCO PRODUCCIÓN": 25,
+            "Disponibilidad L2L TRANSTELCO REPLICA": 27,
+            "Disponibilidad L2L ALESTRA PRODUCCIÓN": 29,
+            "Disponibilidad L2L ALESTRA REPLICA": 31,
+            "Disponibilidad Internet": 33
+        }
+
+        for nombre, indice in indicadores_disponibilidad.items():
+
+            valor = metricas[indice].strip()
+
+            self.logger.escribir_log(
+                f"Validando {nombre}: {valor}"
+            )
+
+            if valor != "100.00%":
+
+                raise Exception(
+                    f"{nombre} No cumple con la disponibilidad requerida: {valor}"
+                )
+
+        self.logger.escribir_log(
+            "Validación de disponibilidades exitosa"
+        )
+
     def aplicar_filtro_today(self,page):
         self.logger.escribir_log("Aplicando filtro Today")
 
@@ -197,6 +233,8 @@ class KibanaClient:
         self.seleccionar_espacio(page)
 
         self.abrir_dashboard(page)
+
+        self.validar_disponibilidades(page)
 
         self.aplicar_filtro_today(page)
 

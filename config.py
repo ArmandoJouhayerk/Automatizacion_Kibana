@@ -1,12 +1,27 @@
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Config:
 
     # Configuración de login y descarga
-    USUARIO = "monitor"
+    USUARIO = os.getenv("KIBANA_USER")
 
-    PASSWORD = "DASH123*"
+    PASSWORD = os.getenv("KIBANA_PASSWORD")
+
+    if not USUARIO:
+
+        raise ValueError(
+            "Variable KIBANA_USER no encontrada"
+        )
+
+    if not PASSWORD:
+
+        raise ValueError(
+            "Variable KIBANA_PASSWORD no encontrada"
+        )
 
     URL_KIBANA = "https://172.16.17.55:5601"
 
@@ -22,3 +37,5 @@ class Config:
         r"C:\Users\jose.mendez\OneDrive - Scontinuidad Latam SA de CV\Documentos\S4Automation",
     "Errores"
     )
+
+    MAX_ERRORES = 10

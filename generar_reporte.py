@@ -1,4 +1,5 @@
 import os
+
 from config import Config
 from logger import Logger
 from outlook_client import OutlookClient
@@ -43,6 +44,7 @@ def main():
             ARCHIVO_LOG,
             max_mb=1
         )
+
         pdfs_eliminados = (
             Mantenimiento.limpiar_pdfs(
                 CARPETA_DESCARGAS,
@@ -50,8 +52,19 @@ def main():
             )
         )
 
+        errores_eliminados = (
+            Mantenimiento.limpiar_errores(
+                Config.CARPETA_ERRORES,
+                max_archivos=Config.MAX_ERRORES
+            )
+        )
+
         logger.escribir_log(
             f"Mantenimiento: {pdfs_eliminados} PDF(s) eliminados"
+        )
+
+        logger.escribir_log(
+            f"Mantenimiento: {errores_eliminados} captura(s) eliminada(s)"
         )
 
         logger.escribir_log(
@@ -72,5 +85,6 @@ def main():
 
         raise
 
+
 if __name__ == "__main__":
-    main() 
+    main()

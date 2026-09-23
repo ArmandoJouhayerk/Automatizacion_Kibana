@@ -1,4 +1,6 @@
 import os
+import config
+
 from datetime import datetime, timedelta
 
 
@@ -67,5 +69,44 @@ class Mantenimiento:
 
                 os.remove(ruta)
                 eliminados += 1
+
+        return eliminados
+
+    @staticmethod
+    def limpiar_errores(
+        carpeta_errores,
+        max_archivos=10
+    ):
+
+        if not os.path.exists(
+            carpeta_errores
+        ):
+            return 0
+
+        archivos = sorted(
+            [
+                os.path.join(
+                    carpeta_errores,
+                    archivo
+                )
+                for archivo in os.listdir(
+                    carpeta_errores
+                )
+                if archivo.endswith(".png")
+            ],
+            key=os.path.getmtime
+        )
+
+        eliminados = 0
+
+        while len(archivos) > max_archivos:
+
+            archivo_eliminar = archivos.pop(0)
+
+            os.remove(
+                archivo_eliminar
+            )
+
+            eliminados += 1
 
         return eliminados
