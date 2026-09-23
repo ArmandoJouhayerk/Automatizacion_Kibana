@@ -64,33 +64,33 @@ class OutlookClient:
                 "No fue posible crear el correo en Outlook"
             )
 
-        # # Remplazar por las direcciones de correo deseadas
-        # correo.To = (
-        #     "jose.mendez@atalait.com"
-        # )
-
-        # # Remplazar por las direcciones de correo deseadas
-        # correo.CC = (
-        #     "jose.mendez@atalait.com"
-        # )
-
+        # Remplazar por las direcciones de correo deseadas
         correo.To = (
-            "193112-stti@banobras.gob.mx"
+            "jose.mendez@atalait.com"
         )
 
+        # Remplazar por las direcciones de correo deseadas
         correo.CC = (
-            "aaguilar@omniprinter.mx;"
-            "luz.rivera@atalait.com;"
-            "carlos.lopez@atalait.com;"
-            "christian.aguilar@atalait.com;"
-            "claudia.chapa@atalait.com;"
-            "cristian.carrillo@atalait.com;"
-            "edwin.gil@atalait.com;"
-            "emanuel.zavala@atalait.com;"
-            "jose.mendez@atalait.com;"
-            "lorenzo.reinoso@atalait.com;"
-            "ricardo.alvarez@atalait.com"
+            "jose.mendez@atalait.com"
         )
+
+        # correo.To = (
+        #     "193112-stti@banobras.gob.mx"
+        # )
+
+        # correo.CC = (
+        #     "aaguilar@omniprinter.mx;"
+        #     "luz.rivera@atalait.com;"
+        #     "carlos.lopez@atalait.com;"
+        #     "christian.aguilar@atalait.com;"
+        #     "claudia.chapa@atalait.com;"
+        #     "cristian.carrillo@atalait.com;"
+        #     "edwin.gil@atalait.com;"
+        #     "emanuel.zavala@atalait.com;"
+        #     "jose.mendez@atalait.com;"
+        #     "lorenzo.reinoso@atalait.com;"
+        #     "ricardo.alvarez@atalait.com"
+        # )
 
         correo.Subject = (
             "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD-"
@@ -126,7 +126,7 @@ Saludos.
             "Reporte agregado al correo"
         )
 
-        correo.Send()
+        correo.Display()
 
         self.logger.escribir_log(
             "Correo enviado correctamente"

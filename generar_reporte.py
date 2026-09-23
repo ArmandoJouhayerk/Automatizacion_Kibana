@@ -6,7 +6,6 @@ from kibana_client import KibanaClient
 from reporte_s4 import ReporteS4
 from mantenimiento import Mantenimiento
 
-# configuracion de login y descarga 
 USUARIO = Config.USUARIO
 PASSWORD = Config.PASSWORD
 
@@ -18,7 +17,6 @@ ARCHIVO_LOG = Config.ARCHIVO_LOG
 
 os.makedirs(CARPETA_DESCARGAS, exist_ok=True)
 
-# Inicialización de logger y clientes
 logger = Logger(ARCHIVO_LOG)
 
 outlook_client = OutlookClient(logger)
@@ -37,8 +35,6 @@ reporte_s4 = ReporteS4(
     logger
     )
 
-
-# Función principal
 def main():
 
     try:
