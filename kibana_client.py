@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright
 from datetime import datetime
+from config import Config
 import os
 
 class KibanaClient:
@@ -205,6 +206,39 @@ class KibanaClient:
 
         return self.exportar_pdf(page)
 
+    def capturar_error(self,page):
+
+            try:
+
+                os.makedirs(
+                Config.CARPETA_ERRORES,
+                exist_ok=True
+                )
+
+                nombre_archivo = os.path.join(
+                Config.CARPETA_ERRORES,
+                "error_"
+                + datetime.now().strftime(
+                    "%d-%m-%Y_%H-%M"
+                )
+                + ".png"
+            )
+
+                page.screenshot(
+                    path=nombre_archivo,
+                    full_page=True
+                )
+
+                self.logger.escribir_log(
+                    f"Captura de error guardada: {nombre_archivo}"
+                )
+
+            except Exception as e:
+
+                self.logger.escribir_log(
+                    f"No fue posible generar captura: {e}"
+                )
+
     def ejecutar(self):
 
         with sync_playwright() as p:
@@ -221,14 +255,25 @@ class KibanaClient:
 
             page = context.new_page()
 
-            self.login(page)
+            try:
 
-            archivo_pdf = self.generar_reporte(
-                page
-            )
+                self.login(page)
 
-            context.close()
-            browser.close()
+                archivo_pdf = self.generar_reporte(
+                    page
+                )
 
-            return archivo_pdf
-        
+                return archivo_pdf
+
+            except Exception:
+
+                self.capturar_error(
+                    page
+                )
+
+                raise
+
+            finally:
+
+                context.close()
+                browser.close()

@@ -1,3 +1,6 @@
+import os
+
+
 class Config:
 
     # Configuración de login y descarga
@@ -15,3 +18,7 @@ class Config:
         r"C:\Users\jose.mendez\OneDrive - Scontinuidad Latam SA de CV\Documentos\S4Automation\Reporte_S4.log"
     )
 
+    CARPETA_ERRORES = os.path.join(
+        r"C:\Users\jose.mendez\OneDrive - Scontinuidad Latam SA de CV\Documentos\S4Automation",
+    "Errores"
+    )
