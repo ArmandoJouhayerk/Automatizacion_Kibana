@@ -283,7 +283,7 @@ class KibanaClient:
 
             browser = p.chromium.launch(
                 channel="msedge",
-                headless=False
+                headless=True
             )
 
             context = browser.new_context(

@@ -1,5 +1,4 @@
 import os
-import config
 
 from datetime import datetime, timedelta
 
