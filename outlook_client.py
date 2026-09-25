@@ -10,7 +10,6 @@ class OutlookClient:
 
         self.logger = logger
 
-
     # Función para enviar el reporte por correo electrónico
     def enviar_reporte(
         self,
