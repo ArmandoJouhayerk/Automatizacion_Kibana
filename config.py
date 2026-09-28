@@ -1,41 +1,40 @@
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / ".env")
+
 
 class Config:
+    USUARIO = os.getenv("KIBANA_USER", "").strip()
+    PASSWORD = os.getenv("KIBANA_PASSWORD", "")
+    URL_KIBANA = os.getenv("KIBANA_URL", "").strip().rstrip("/")
 
-    # Configuración de login y descarga
-    USUARIO = os.getenv("KIBANA_USER")
+    CARPETA_DESCARGAS = Path(
+        os.getenv("REPORTES_DIR", str(BASE_DIR / "Reportes_S4"))
+    ).expanduser().resolve()
+    ARCHIVO_LOG = Path(
+        os.getenv("LOG_FILE", str(BASE_DIR / "Reporte_S4.log"))
+    ).expanduser().resolve()
+    CARPETA_ERRORES = Path(
+        os.getenv("ERRORS_DIR", str(BASE_DIR / "Errores"))
+    ).expanduser().resolve()
+    MAX_ERRORES = int(os.getenv("MAX_ERRORS", "10"))
 
-    PASSWORD = os.getenv("KIBANA_PASSWORD")
+    OUTLOOK_TO = os.getenv("OUTLOOK_TO", "").strip()
+    OUTLOOK_CC = os.getenv("OUTLOOK_CC", "").strip()
 
     if not USUARIO:
-
-        raise ValueError(
-            "Variable KIBANA_USER no encontrada"
-        )
+        raise ValueError("Variable KIBANA_USER no encontrada")
 
     if not PASSWORD:
+        raise ValueError("Variable KIBANA_PASSWORD no encontrada")
 
-        raise ValueError(
-            "Variable KIBANA_PASSWORD no encontrada"
-        )
+    if not URL_KIBANA:
+        raise ValueError("Variable KIBANA_URL no encontrada")
 
-    URL_KIBANA = "https://172.16.17.55:5601"
-
-    CARPETA_DESCARGAS = (
-        r"C:\Users\jose.mendez\OneDrive - Scontinuidad Latam SA de CV\Documentos\S4Automation\Reportes_S4"
-    )
-
-    ARCHIVO_LOG = (
-        r"C:\Users\jose.mendez\OneDrive - Scontinuidad Latam SA de CV\Documentos\S4Automation\Reporte_S4.log"
-    )
-
-    CARPETA_ERRORES = os.path.join(
-        r"C:\Users\jose.mendez\OneDrive - Scontinuidad Latam SA de CV\Documentos\S4Automation",
-    "Errores"
-    )
-
-    MAX_ERRORES = 10
+    if MAX_ERRORES < 0:
+        raise ValueError("MAX_ERRORS debe ser un entero mayor o igual a 0")

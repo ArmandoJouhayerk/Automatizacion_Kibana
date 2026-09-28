@@ -3,6 +3,8 @@ import time
 import win32com.client
 from datetime import datetime
 
+from config import Config
+
 
 class OutlookClient:
 
@@ -63,33 +65,11 @@ class OutlookClient:
                 "No fue posible crear el correo en Outlook"
             )
 
-        # # Remplazar por las direcciones de correo deseadas
-        # correo.To = (
-        #     "jose.mendez@atalait.com"
-        # )
+        if not Config.OUTLOOK_TO:
+            raise ValueError("Variable OUTLOOK_TO no encontrada")
 
-        # # Remplazar por las direcciones de correo deseadas
-        # correo.CC = (
-        #     "jose.mendez@atalait.com"
-        # )
-
-        correo.To = (
-            "193112-stti@banobras.gob.mx"
-        )
-
-        correo.CC = (
-            "aaguilar@omniprinter.mx;"
-            "luz.rivera@atalait.com;"
-            "carlos.lopez@atalait.com;"
-            "christian.aguilar@atalait.com;"
-            "claudia.chapa@atalait.com;"
-            "cristian.carrillo@atalait.com;"
-            "edwin.gil@atalait.com;"
-            "emanuel.zavala@atalait.com;"
-            "jose.mendez@atalait.com;"
-            "lorenzo.reinoso@atalait.com;"
-            "ricardo.alvarez@atalait.com"
-        )
+        correo.To = Config.OUTLOOK_TO
+        correo.CC = Config.OUTLOOK_CC
 
         correo.Subject = (
             "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD-"

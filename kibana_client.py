@@ -38,24 +38,40 @@ class KibanaClient:
         )
 
         page.goto(
-            self.url_kibana
+            self.url_kibana,
+            wait_until="domcontentloaded",
+            timeout=120000
         )
 
-        page.wait_for_timeout(3000)
+        self.logger.escribir_log(
+            "Esperando formulario de inicio de sesión"
+        )
+
+        usuario_input = page.locator(
+            "input[type='text']"
+        )
+        password_input = page.locator(
+            "input[type='password']"
+        )
+
+        usuario_input.wait_for(
+            state="visible",
+            timeout=30000
+        )
+        password_input.wait_for(
+            state="visible",
+            timeout=30000
+        )
 
         self.logger.escribir_log(
             "Ingresando credenciales"
         )
 
-        page.locator(
-            "input[type='text']"
-        ).fill(
+        usuario_input.fill(
             self.usuario
         )
 
-        page.locator(
-            "input[type='password']"
-        ).fill(
+        password_input.fill(
             self.password
         )
 
@@ -63,20 +79,21 @@ class KibanaClient:
             "button"
         ).last.click()
 
-        page.wait_for_timeout(5000)
-
     def seleccionar_espacio(self,page):
 
         self.logger.escribir_log(
             "Seleccionando espacio Workspace de Verificación"
         )
 
-        page.wait_for_timeout(5000)
-
-        page.get_by_role(
+        workspace = page.get_by_role(
             "link",
             name="Workspace de Verificación"
-        ).click()
+        )
+        workspace.wait_for(
+            state="visible",
+            timeout=60000
+        )
+        workspace.click()
 
         page.wait_for_timeout(5000)
 
@@ -87,7 +104,7 @@ class KibanaClient:
         )
 
         page.goto(
-            "https://172.16.17.55:5601/app/dashboards#/list",
+            f"{self.url_kibana}/app/dashboards#/list",
             wait_until="networkidle"
         )
 
@@ -234,9 +251,9 @@ class KibanaClient:
 
         self.abrir_dashboard(page)
 
-        self.validar_disponibilidades(page)
-
         self.aplicar_filtro_today(page)
+
+        self.validar_disponibilidades(page)
 
         self.abrir_share(page)
 

@@ -208,20 +208,35 @@ GlobalProtect
 
 # Configuración de credenciales
 
-Las credenciales de acceso a Kibana se almacenan en un archivo:
+La configuración se carga desde `.env` en la raíz del proyecto. Para preparar el archivo local, copia `.env.example` como `.env` y completa estos valores:
 
 ```text
-.env
+KIBANA_USER
+KIBANA_PASSWORD
+KIBANA_URL
+REPORTES_DIR
+LOG_FILE
+ERRORS_DIR
+MAX_ERRORS
+OUTLOOK_TO
+OUTLOOK_CC
 ```
 
-Ejemplo:
+`REPORTES_DIR`, `LOG_FILE` y `ERRORS_DIR` aceptan rutas absolutas. Si se omiten, se usan ubicaciones predeterminadas junto al proyecto. Los destinatarios de Outlook se separan con punto y coma; `OUTLOOK_TO` es obligatorio para preparar el correo y `OUTLOOK_CC` puede quedar vacío.
 
 ```text
-KIBANA_USER=USER
-KIBANA_PASSWORD=********
+KIBANA_USER=TU_USUARIO
+KIBANA_PASSWORD=TU_PASSWORD
+KIBANA_URL=https://servidor-kibana:5601
+REPORTES_DIR=C:/ruta/al/proyecto/Reportes_S4
+LOG_FILE=C:/ruta/al/proyecto/Reporte_S4.log
+ERRORS_DIR=C:/ruta/al/proyecto/Errores
+MAX_ERRORS=10
+OUTLOOK_TO=destinatario@empresa.com
+OUTLOOK_CC=copia1@empresa.com;copia2@empresa.com
 ```
 
-El archivo `.env` está excluido del repositorio mediante:
+No subas `.env` ni credenciales reales al repositorio. El archivo `.env` está excluido mediante:
 
 ```text
 .gitignore
