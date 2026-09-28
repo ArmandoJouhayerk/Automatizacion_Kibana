@@ -220,9 +220,11 @@ ERRORS_DIR
 MAX_ERRORS
 OUTLOOK_TO
 OUTLOOK_CC
+OUTLOOK_ERROR_TO
 ```
 
-`REPORTES_DIR`, `LOG_FILE` y `ERRORS_DIR` aceptan rutas absolutas. Si se omiten, se usan ubicaciones predeterminadas junto al proyecto. Los destinatarios de Outlook se separan con punto y coma; `OUTLOOK_TO` es obligatorio para preparar el correo y `OUTLOOK_CC` puede quedar vacío.
+`REPORTES_DIR`, `LOG_FILE` y `ERRORS_DIR` aceptan rutas absolutas.  Los destinatarios de Outlook se separan con punto y coma; `OUTLOOK_TO` es obligatorio para preparar el correo y `OUTLOOK_CC` puede quedar vacío.
+`OUTLOOK_ERROR_TO` es el destinatario exclusivo de avisos de falla y no recibe las copias del reporte.
 
 ```text
 KIBANA_USER=TU_USUARIO
@@ -234,6 +236,7 @@ ERRORS_DIR=C:/ruta/al/proyecto/Errores
 MAX_ERRORS=10
 OUTLOOK_TO=destinatario@empresa.com
 OUTLOOK_CC=copia1@empresa.com;copia2@empresa.com
+OUTLOOK_ERROR_TO=alertas@empresa.com
 ```
 
 No subas `.env` ni credenciales reales al repositorio. El archivo `.env` está excluido mediante:
@@ -249,6 +252,8 @@ No subas `.env` ni credenciales reales al repositorio. El archivo `.env` está e
 ```bash
 python generar_reporte.py
 ```
+
+Si el proceso falla, intenta enviar una notificación de error a `OUTLOOK_TO` y `OUTLOOK_CC` mediante Outlook. El aviso incluye el tipo y mensaje del error, la fecha y la ruta del log. Si Outlook no está disponible, el fallo del aviso también queda registrado en el log y se conserva el error original del proceso.
 
 ---
 
@@ -463,31 +468,4 @@ Outlook
 Correo
 ↓
 Fin
-```
-
----
-
-# Estado actual
-
-## Versión estable
-
-Características implementadas:
-
-- Arquitectura POO.
-- Configuración mediante `.env`.
-- Generación automática de PDF.
-- Envío automático por Outlook.
-- Validación automática de disponibilidades.
-- Capturas automáticas de error.
-- Limpieza automática de reportes.
-- Limpieza automática de logs.
-- Limpieza automática de capturas.
-- Ejecución automática mediante Task Scheduler.
-- Gestión mediante Git y GitHub.
-
-Estado:
-
-```text
-Producción
-Estable
 ```

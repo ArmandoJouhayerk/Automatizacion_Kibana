@@ -16,7 +16,7 @@ class OutlookClient:
     def enviar_reporte(
         self,
         archivo_pdf
-    ):
+        ):
 
         hora_actual = datetime.now().hour
 
@@ -78,11 +78,11 @@ class OutlookClient:
 
         correo.Body = f"""{saludo}, equipo:
 
-Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
+        Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
 
-Quedo atento a cualquier comentario.
+        Quedo atento a cualquier comentario.
 
-Saludos.
+        Saludos.
         """
 
         if not archivo_pdf:
@@ -113,3 +113,51 @@ Saludos.
 
         correo = None
         outlook = None
+
+    def enviar_notificacion_fallo(self, error):
+        if not Config.OUTLOOK_ERROR_TO:
+            raise ValueError("Variable OUTLOOK_ERROR_TO no encontrada")
+
+        self.logger.escribir_log(
+            "Preparando notificación de falla por Outlook"
+        )
+
+        outlook = win32com.client.Dispatch(
+            "Outlook.Application"
+        )
+
+        correo = None
+
+        for intento in range(5):
+            try:
+                correo = outlook.CreateItem(0)
+                break
+            except Exception as error_outlook:
+                self.logger.escribir_log(
+                    f"CreateItem para notificación falló intento {intento + 1}: {error_outlook}"
+                )
+                if intento < 4:
+                    time.sleep(5)
+
+        if correo is None:
+            raise RuntimeError(
+                "No fue posible crear el correo de notificación de falla en Outlook"
+            )
+
+        correo.To = Config.OUTLOOK_ERROR_TO
+        correo.CC = ""
+        correo.Subject = (
+            "FALLA - Automatización S4 - "
+            + datetime.now().strftime("%d-%m-%Y_%H-%M")
+        )
+        correo.Body = (
+            "La ejecución de la automatización S4 terminó con error.\n\n"
+            f"Error: {type(error).__name__}: {error}\n"
+            f"Fecha y hora: {datetime.now().strftime('%d-%m-%Y %H:%M:%S')}\n"
+            f"Archivo de log: {Config.ARCHIVO_LOG}\n"
+        )
+        correo.Send()
+
+        self.logger.escribir_log(
+            "Notificación de falla enviada correctamente"
+        )

@@ -26,6 +26,7 @@ class Config:
 
     OUTLOOK_TO = os.getenv("OUTLOOK_TO", "").strip()
     OUTLOOK_CC = os.getenv("OUTLOOK_CC", "").strip()
+    OUTLOOK_ERROR_TO = os.getenv("OUTLOOK_ERROR_TO", "").strip()
 
     if not USUARIO:
         raise ValueError("Variable KIBANA_USER no encontrada")

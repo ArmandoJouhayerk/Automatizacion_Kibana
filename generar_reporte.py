@@ -83,6 +83,13 @@ def main():
             f"ERROR GENERAL: {str(e)}"
         )
 
+        try:
+            outlook_client.enviar_notificacion_fallo(e)
+        except Exception as error_notificacion:
+            logger.escribir_log(
+                f"No fue posible enviar la notificación de falla: {error_notificacion}"
+            )
+
         raise
 
 
