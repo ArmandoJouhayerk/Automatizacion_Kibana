@@ -78,11 +78,11 @@ class OutlookClient:
 
         correo.Body = f"""{saludo}, equipo:
 
-        Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
+Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
 
-        Quedo atento a cualquier comentario.
+Quedo atento a cualquier comentario.
 
-        Saludos.
+Saludos.
         """
 
         if not archivo_pdf:
