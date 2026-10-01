@@ -259,19 +259,49 @@ Si el proceso falla, intenta enviar una notificación de error a `OUTLOOK_TO` y 
 
 # Ejecución programada
 
-La automatización está diseñada para ejecutarse mediante:
-
-```text
-Task Scheduler
-```
-
-Frecuencia:
+La automatización puede programarse con el **Programador de tareas de Windows**. Configura una tarea con dos desencadenadores semanales para ejecutarla de lunes a viernes a las 08:00 y a las 20:00.
 
 ```text
 Lunes a Viernes
 08:00 AM
 08:00 PM
 ```
+
+## Crear la tarea
+
+1. Verifica que el archivo `.env` esté configurado y que la ejecución manual con `python generar_reporte.py` funcione.
+2. Abre **Programador de tareas** desde el menú Inicio y selecciona **Crear tarea...** (no **Crear tarea básica...**).
+3. En **General**:
+   - Asigna un nombre, por ejemplo `Reporte diario S4`.
+   - Selecciona la cuenta de Windows que tiene configurado el perfil de Outlook.
+   - Selecciona **Ejecutar solo cuando el usuario haya iniciado sesión**. Outlook se automatiza mediante el perfil de escritorio de esa cuenta.
+4. En **Desencadenadores**, crea dos desencadenadores:
+   - Selecciona **Según una programación** y **Semanal**; marca de lunes a viernes y configura la hora como **08:00:00**.
+   - Repite el proceso para un segundo desencadenador a las **20:00:00**, también de lunes a viernes.
+5. En **Acciones**, crea una acción **Iniciar un programa**:
+   - **Programa o script**: selecciona el ejecutable de Python usado para instalar las dependencias. Si se usa un entorno virtual, selecciona `venv\Scripts\python.exe` dentro de la carpeta del proyecto.
+   - **Agregar argumentos**: escribe la ruta completa entre comillas al script `generar_reporte.py`, por ejemplo:
+
+     ```text
+     "C:\ruta\al\proyecto\generar_reporte.py"
+     ```
+
+   - **Iniciar en (opcional)**: escribe la ruta completa de la carpeta del proyecto, sin comillas, por ejemplo:
+
+     ```text
+     C:\ruta\al\proyecto
+     ```
+
+     No agregues `generar_reporte.py` en este campo.
+6. En **Configuración**, puedes habilitar **Ejecutar la tarea lo antes posible después de que se omita un inicio programado**. Para evitar ejecuciones duplicadas, configura **Si la tarea ya se está ejecutando** como **No iniciar una instancia nueva**.
+7. Guarda la tarea y prueba con clic derecho sobre ella y **Ejecutar**. Revisa `Reporte_S4.log` para confirmar el resultado.
+
+## Requisitos para que se ejecute
+
+- El equipo debe estar encendido y conectado a la red; evita que entre en suspensión durante los horarios programados.
+- GlobalProtect debe estar conectado para que la aplicación pueda acceder a Kibana.
+- La cuenta seleccionada debe tener Outlook configurado y disponible. Si no se puede acceder a Outlook, el resultado se registrará en el log.
+- Usa rutas locales válidas para el proyecto y el entorno virtual. El archivo `.env` se lee desde la carpeta del proyecto.
 
 ---
 
