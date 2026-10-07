@@ -15,7 +15,7 @@ Thumbs.db
 *.log
 
 # Reportes generados
-Reportes_S4/
+Reportes/
 *.pdf
 
 # Capturas de error
