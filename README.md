@@ -1,8 +1,8 @@
-# Automatización S4 Servicio Administrado de Conectividad
+# Automatización Reporte Kibana
 
 ## Descripción
 
-Automatización desarrollada en Python para generar y distribuir automáticamente el reporte diario del servicio S4 desde Kibana.
+Automatización desarrollada en Python para generar y distribuir automáticamente un reporte diario desde Kibana.
 
 El proceso realiza las siguientes actividades:
 
@@ -10,7 +10,7 @@ El proceso realiza las siguientes actividades:
 - Inicia sesión automáticamente.
 - Selecciona el Workspace correspondiente.
 - Accede al dashboard:
-  - S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD
+  - Dashboard_Ejemplo
 - Valida indicadores críticos de disponibilidad.
 - Aplica el filtro de fecha:
   - Today
