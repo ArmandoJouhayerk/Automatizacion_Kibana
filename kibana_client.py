@@ -28,7 +28,7 @@ class KibanaClient:
 
         return os.path.join(
             self.carpeta_descargas,
-            f"S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD_{fecha_archivo}.pdf"
+            f"Reporte_{fecha_archivo}.pdf"
         )
     
     def login(self,page):
@@ -82,12 +82,12 @@ class KibanaClient:
     def seleccionar_espacio(self,page):
 
         self.logger.escribir_log(
-            "Seleccionando espacio Workspace de Verificación"
+            "Seleccionando espacio de trabajo"
         )
 
         workspace = page.get_by_role(
             "link",
-            name="Workspace de Verificación"
+            name="Workspace"
         )
         workspace.wait_for(
             state="visible",
@@ -111,11 +111,11 @@ class KibanaClient:
         page.wait_for_timeout(5000)
 
         self.logger.escribir_log(
-            "Abriendo Dashboard S4"
+            "Abriendo Dashboard"
         )
 
         page.get_by_text(
-            "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD",
+            "Ejemplo_dashboard",
             exact=False
         ).first.click()
 
@@ -130,12 +130,10 @@ class KibanaClient:
         indicadores_disponibilidad = {
             "Disponibilidad del servicio": 1,
             "Disponibilidad por ping": 11,
-            "BAN_SWCORE_DC_PRIMARIO": 19,
-            "BAN_SWADMIN_DC_PRIMARIO": 22,
-            "Disponibilidad L2L TRANSTELCO PRODUCCIÓN": 25,
-            "Disponibilidad L2L TRANSTELCO REPLICA": 27,
-            "Disponibilidad L2L ALESTRA PRODUCCIÓN": 29,
-            "Disponibilidad L2L ALESTRA REPLICA": 31,
+            "Disponibilidad L2L 1": 25,
+            "Disponibilidad L2L 2": 27,
+            "Disponibilidad L2L 3": 29,
+            "Disponibilidad L2L 4": 31,
             "Disponibilidad Internet": 33
         }
 
