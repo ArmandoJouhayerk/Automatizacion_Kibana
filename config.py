@@ -14,10 +14,10 @@ class Config:
     URL_KIBANA = os.getenv("KIBANA_URL", "").strip().rstrip("/")
 
     CARPETA_DESCARGAS = Path(
-        os.getenv("REPORTES_DIR", str(BASE_DIR / "Reportes_S4"))
+        os.getenv("REPORTES_DIR", str(BASE_DIR / "Reportes"))
     ).expanduser().resolve()
     ARCHIVO_LOG = Path(
-        os.getenv("LOG_FILE", str(BASE_DIR / "Reporte_S4.log"))
+        os.getenv("LOG_FILE", str(BASE_DIR / "Reporte.log"))
     ).expanduser().resolve()
     CARPETA_ERRORES = Path(
         os.getenv("ERRORS_DIR", str(BASE_DIR / "Errores"))
