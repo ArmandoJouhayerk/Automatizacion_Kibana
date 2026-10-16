@@ -30,7 +30,7 @@ kibana_client = KibanaClient(
     CARPETA_DESCARGAS
     )
 
-reporte_s4 = ReporteS4(
+reporte = Reporte(
     kibana_client,
     outlook_client,
     logger
@@ -71,7 +71,7 @@ def main():
             "Inicio de ejecución"
         )
 
-        reporte_s4.ejecutar()
+        reporte.ejecutar()
 
         logger.escribir_log(
             "Fin de ejecución"
