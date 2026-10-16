@@ -1,4 +1,4 @@
-import os
+timport os
 import time
 import win32com.client
 from datetime import datetime
@@ -72,17 +72,13 @@ class OutlookClient:
         correo.CC = Config.OUTLOOK_CC
 
         correo.Subject = (
-            "S4 SERVICIO ADMINISTRADO DE CONECTIVIDAD-"
+            "Subject -"
             + datetime.now().strftime("%d-%m-%Y_%H-%M")
         )
 
         correo.Body = f"""{saludo}, equipo:
 
-Se comparte el reporte S4 Servicio Administrado de Conectividad, el cual presenta una operación estable y sin incidencias al momento de la validación.
-
-Quedo atento a cualquier comentario.
-
-Saludos.
+Cuerpo de correo.
         """
 
         if not archivo_pdf:
@@ -147,11 +143,11 @@ Saludos.
         correo.To = Config.OUTLOOK_ERROR_TO
         correo.CC = ""
         correo.Subject = (
-            "FALLA - Automatización S4 - "
+            "FALLA - Automatización- "
             + datetime.now().strftime("%d-%m-%Y_%H-%M")
         )
         correo.Body = (
-            "La ejecución de la automatización S4 terminó con error.\n\n"
+            "La ejecución de la automatización terminó con error.\n\n"
             f"Error: {type(error).__name__}: {error}\n"
             f"Fecha y hora: {datetime.now().strftime('%d-%m-%Y %H:%M:%S')}\n"
             f"Archivo de log: {Config.ARCHIVO_LOG}\n"
